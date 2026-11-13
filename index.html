@@ -3,81 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>技能树成长路径 Dashboard</title>
+    <meta name="description" content="基于 Kaggle 2022 调查的交互分析：比较 13 类岗位、4 个编程经验组的工具使用情况，探索数据从业者的技能组合。" />
+    <title>数据从业者的技能图谱 · Kaggle 2022</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#explore">跳转到交互探索</a>
     <div class="page-shell">
       <header class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Career Skill Tree</p>
-          <h1>从 Python/SQL 到云架构与 MLOps 的成长路径</h1>
+          <p class="eyebrow">Kaggle Survey / 2022</p>
+          <h1>数据从业者的技能组合，<br />如何随岗位与编程经验变化？</h1>
           <p class="hero-text" id="hero-subtitle"></p>
-          <div class="hero-note" id="stage-note"></div>
+          <div class="project-stats" id="project-stats" aria-label="分析规模"></div>
+          <nav class="hero-links" aria-label="页面导航">
+            <a class="primary-link" href="#explore">开始探索 ↓</a>
+            <a href="#findings">先看核心发现</a>
+            <a href="#methodology">数据与方法</a>
+          </nav>
         </div>
-        <aside class="control-panel">
-          <div class="control-card">
-            <label for="job-select">当前职位</label>
-            <select id="job-select"></select>
-          </div>
-          <div class="control-card">
-            <label for="stage-select">当前年限段</label>
-            <select id="stage-select"></select>
-          </div>
-          <div class="control-card compact">
-            <span class="metric-label">下一阶段</span>
-            <strong id="next-stage-label">-</strong>
-          </div>
-        </aside>
       </header>
-
-      <main class="dashboard-grid">
-        <section class="panel panel-wide">
+      <main>
+        <section class="findings-section" id="findings" aria-labelledby="findings-title">
           <div class="panel-head">
-            <div>
-              <p class="section-kicker">Skill Path</p>
-              <h2>技能演化路线</h2>
-            </div>
-            <p class="section-copy">
-              高亮当前阶段，并沿着后续阶段查看每个阶段最具代表性的技能组合。
-            </p>
+            <div><p class="section-kicker">Key findings</p><h2 id="findings-title">先看三个发现</h2></div>
+            <p class="section-copy">基于完整分析样本的固定发现；点击卡片下方按钮查看对应证据。</p>
           </div>
-          <div class="stage-path" id="stage-path"></div>
+          <div class="findings-grid" id="findings-grid"></div>
         </section>
-
-        <section class="panel">
+        <section class="panel explore-panel" id="explore" aria-labelledby="explore-title" tabindex="-1">
           <div class="panel-head">
-            <div>
-              <p class="section-kicker">Unlocks</p>
-              <h2>下一阶段最值得解锁的 Top 3</h2>
-            </div>
+            <div><p class="section-kicker">Explore the data</p><h2 id="explore-title">探索你的关注岗位</h2></div>
+            <p class="section-copy">选择岗位与编程经验组，比较工具使用情况。</p>
           </div>
-          <div class="unlock-list" id="unlock-list"></div>
+          <div class="control-panel">
+            <div class="control-card"><label for="job-select">岗位</label><select id="job-select"></select></div>
+            <div class="control-card"><label for="stage-select">编程经验组</label><select id="stage-select"></select></div>
+            <div class="control-card compact"><span class="metric-label">相邻对照组</span><strong id="next-stage-label">-</strong></div>
+          </div>
+          <p class="hero-note" id="stage-note"></p>
+          <div class="selection-insight" role="status" aria-live="polite" aria-atomic="true">
+            <p class="section-kicker">当前选择解读</p><p id="selection-insight"></p>
+          </div>
+          <p class="reading-note">这里比较的是不同人群，并非追踪个人成长；使用率差异不代表学习收益或晋升要求。</p>
         </section>
-
-        <section class="panel">
-          <div class="panel-head">
-            <div>
-              <p class="section-kicker">Category Trend</p>
-              <h2>技术栈重心迁移</h2>
+        <div class="dashboard-grid">
+          <section class="panel panel-wide" id="skill-path" tabindex="-1">
+            <div class="panel-head">
+              <div><p class="section-kicker">Skill profile</p><h2>各编程经验组的技能组合</h2></div>
+              <p class="section-copy">高亮当前组与相邻对照组。条形图为类别内工具使用率的平均值。</p>
             </div>
-          </div>
-          <div class="category-grid" id="category-grid"></div>
-        </section>
-
-        <section class="panel panel-wide">
-          <div class="panel-head">
-            <div>
-              <p class="section-kicker">Waterfall</p>
-              <h2>被放弃的工具 vs 新采纳的工具</h2>
+            <div class="stage-path" id="stage-path"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><div><p class="section-kicker">Learning signals</p><h2>值得关注的技能 Top 3</h2></div></div>
+            <p class="section-copy">综合相邻组的使用率差值与使用水平排序，作为探索学习方向的线索。<a href="#methodology">查看计算方法</a></p>
+            <div class="unlock-list" id="unlock-list"></div>
+          </section>
+          <section class="panel" id="category-trend" tabindex="-1">
+            <div class="panel-head"><div><p class="section-kicker">Category comparison</p><h2>技术栈使用情况对比</h2></div></div>
+            <p class="section-copy">类别内各工具使用率的简单平均，不代表使用过该类任一工具的人数占比。</p>
+            <div class="category-grid" id="category-grid"></div>
+          </section>
+          <section class="panel panel-wide" id="skill-differences" tabindex="-1">
+            <div class="panel-head">
+              <div><p class="section-kicker">Group differences</p><h2>相邻经验组的工具使用率差异</h2></div>
+              <p class="section-copy" id="waterfall-caption"></p>
             </div>
-            <p class="section-copy" id="waterfall-caption"></p>
-          </div>
-          <div class="waterfall-board" id="waterfall-board"></div>
+            <p class="reading-note">差值 = 对照组 − 当前组，单位为百分点。分别展示最多 5 项较低、较高的工具。</p>
+            <div class="waterfall-board" id="waterfall-board"></div>
+          </section>
+        </div>
+        <section class="panel methodology" id="methodology" aria-labelledby="method-title">
+          <p class="section-kicker">Behind the numbers</p><h2 id="method-title">数据与方法</h2>
+          <p class="section-copy">数据来自 <a href="https://www.kaggle.com/competitions/kaggle-survey-2022/data" target="_blank" rel="noopener noreferrer">Kaggle 2022 Machine Learning &amp; Data Science Survey ↗</a>。本项目描述 2022 年受访样本，不代表当前就业市场。</p>
+          <details>
+            <summary>研究问题与样本筛选</summary>
+            <p>项目关注不同岗位、不同编程经验人群使用哪些工具，以及相邻经验组之间存在什么差异。按职位字段 Q23 筛除缺失值，以及含 student、unemployed、not employed、retired、none、other 的记录；当前看板汇总 8,444 个样本、13 类岗位。</p>
+            <p>这是研究范围筛选，被排除的记录不等同于无效数据。问卷为自愿参与，样本不能直接代表所有数据从业者。</p>
+          </details>
+          <details>
+            <summary>编程经验如何分组？</summary>
+            <p>经验来自 Q11（编程经验），并非工作年限或当前岗位任职年限。将原始六档合并为四组：</p>
+            <ul><li>不足1年：&lt; 1 year</li><li>1–5年（合并组）：1–3 years + 3–5 years</li><li>5–10年：5–10 years</li><li>10年以上（合并组）：10–20 years + 20+ years</li></ul>
+            <p>显示标签用于概括原始问卷区间，不重新推断年限边界。合并时汇总使用人数与样本数后计算比例。</p>
+          </details>
+          <details>
+            <summary>使用率、差值与 Top 3 如何计算？</summary>
+            <p>工具使用率 = 该岗位、经验组中勾选此工具的人数 ÷ 该组样本数 × 100%。多选题的空值和未选项按 0 处理，无法区分未使用、未回答或问卷跳题，因此结果应理解为该组样本中的勾选比例。</p>
+            <p>类别指标是该类别各工具使用率的简单平均，已排除 Other、None 等非具体工具选项；不同类别的选项数量与构成不同，不宜据此直接判断类别的重要性。</p>
+            <p>相邻组差值 = 对照组使用率 − 当前组使用率，单位为百分点。Top 3 优先筛选差值为正且对照组使用率不低于 12% 的工具；不足三项时，放宽为全部正差值工具。排序得分 = 0.7 × 差值 + 0.3 × 对照组使用率，最多展示三项。</p>
+          </details>
+          <details>
+            <summary>这些结果可以说明什么？</summary>
+            <p>结果用于描述群体差异，不能推出个人随经验增长会新增或放弃某个工具，也不能证明学习某项技能会带来晋升或薪资提升。岗位、地区等其他因素可能影响结果。</p>
+            <p>页面对少于 30 人的分组显示提示，这是阅读提醒，并非统计显著性标准。本项目未进行显著性检验，核心发现属于描述性分析。</p>
+          </details>
         </section>
       </main>
+      <footer class="site-footer">Kaggle 2022 · 从数据出发，理解技能差异。</footer>
+      <noscript><p class="empty-state">请启用 JavaScript，以查看数据、核心发现和交互图表。</p></noscript>
     </div>
-
     <script src="./dashboard-data.js"></script>
     <script src="./app.js"></script>
   </body>

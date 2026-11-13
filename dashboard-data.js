@@ -1,8 +1,8 @@
 window.DASHBOARD_DATA = {
   "meta": {
-    "title": "技能树成长路径 Dashboard",
-    "subtitle": "基于 Kaggle 2022 调查，追踪在职从业者从基础栈走向云与 MLOps 的演化轨迹",
-    "stage_note": "2-4年 与 10年以上为近似阶段，为了更适合网页与 BI 仪表板叙事，将原始 6 档经验分组聚合为 4 档。",
+    "title": "数据从业者的技能图谱",
+    "subtitle": "基于 Kaggle 2022 调查，比较不同岗位、不同编程经验人群的工具使用情况，识别常见技能与群体差异，为学习规划提供参考。",
+    "stage_note": "经验指编程经验。1–5年合并原始 1–3 与 3–5 年组，10年以上合并 10–20 与 20+ 年组；详见数据与方法。",
     "categories": {
       "language": "编程语言",
       "visualization": "可视化",

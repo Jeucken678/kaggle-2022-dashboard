@@ -470,3 +470,78 @@ h2 {
     justify-content: flex-start;
   }
 }
+
+/* Project narrative and evidence, using the existing paper / teal palette. */
+html { scroll-behavior: smooth; }
+section { scroll-margin-top: 24px; }
+a { color: var(--accent); text-underline-offset: 4px; }
+a:hover { text-decoration-thickness: 2px; }
+button, select, summary { font: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.skip-link { position: fixed; top: -80px; left: 16px; z-index: 10; padding: 12px; background: white; }
+.skip-link:focus { top: 12px; }
+.hero { display: block; }
+.hero-copy { padding: 40px; }
+.hero-copy::after { pointer-events: none; }
+h1 { max-width: 28ch; font-family: inherit; font-size: clamp(28px, 3.3vw, 46px); line-height: 1.35; letter-spacing: -.035em; }
+h2 { font-family: inherit; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.4; }
+.hero-text { max-width: 85ch; }
+.project-stats { display: flex; flex-wrap: wrap; gap: 20px 42px; margin: 28px 0; }
+.project-stats div { display: grid; gap: 4px; }
+.project-stats strong { font-size: 30px; font-variant-numeric: tabular-nums; }
+.project-stats span { font-size: 13px; color: var(--muted); }
+.hero-links { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; z-index: 1; }
+.primary-link { background: var(--accent); color: white; padding: 12px 20px; border-radius: 12px; text-decoration: none; }
+.findings-section { margin: 36px 0; }
+.findings-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.finding-card { display: flex; flex-direction: column; min-width: 0; padding: 26px; border-radius: 24px; background: var(--paper); border: 1px solid var(--stroke); border-top: 3px solid var(--accent); }
+.finding-number { margin: 0 0 14px; color: var(--accent); font-size: 12px; letter-spacing: .12em; }
+.finding-card h3 { margin: 0 0 22px; font-size: 20px; line-height: 1.5; }
+.finding-metric { font-size: clamp(24px, 2.5vw, 34px); color: var(--accent); font-variant-numeric: tabular-nums; }
+.finding-label { font-size: 12px; color: var(--muted); margin: 6px 0 16px; }
+.finding-evidence, .finding-note { font-size: 14px; line-height: 1.8; margin: 0 0 12px; }
+.finding-note { color: var(--muted); }
+.finding-actions { margin-top: auto; padding-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.finding-actions button { cursor: pointer; text-align: left; padding: 9px 12px; border: 1px solid rgba(15,118,110,.25); border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 13px; }
+.finding-actions button:hover { background: #c1e5dc; }
+.explore-panel { margin-bottom: 24px; }
+.control-panel { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); padding: 0; background: none; box-shadow: none; border: 0; backdrop-filter: none; align-items: stretch; }
+.control-card { min-width: 0; }
+.control-card.compact { display: block; }
+.control-card.compact strong { display: block; padding: 12px 0; }
+.hero-note { background: none; padding: 0; border: none; border-radius: 0; font-size: 13px; }
+.selection-insight { margin-top: 20px; padding: 20px 24px; background: var(--accent-soft); border-radius: 16px; border-left: 3px solid var(--accent); }
+#selection-insight { line-height: 1.9; margin: 0; overflow-wrap: anywhere; }
+.reading-note { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.section-copy { font-size: 14px; max-width: 55ch; }
+.stage-title { font-size: 21px; }
+.stage-card.future::before { content: "对照组"; position: static; display: inline-block; margin-bottom: 10px; }
+.trend-cell strong { font-size: 18px; }
+.trend-cell span { font-size: 12px; }
+.bar-skill, .skill-chip, .unlock-title { overflow-wrap: anywhere; }
+.methodology { margin-top: 32px; }
+.methodology > .section-copy { max-width: none; }
+.methodology details { border-top: 1px solid var(--stroke); padding: 18px 0; }
+.methodology summary { cursor: pointer; font-weight: 600; line-height: 1.6; }
+.methodology details p, .methodology li { max-width: 100ch; color: var(--muted); font-size: 14px; line-height: 1.9; overflow-wrap: anywhere; }
+.site-footer { padding-top: 28px; text-align: center; color: var(--muted); font-size: 13px; }
+@media (max-width: 1000px) {
+  .findings-grid { grid-template-columns: 1fr; }
+  .finding-card h3 { margin-bottom: 12px; }
+  .finding-metric { font-size: 32px; }
+}
+@media (max-width: 760px) {
+  .hero-copy { padding: 24px; }
+  .panel-head { display: block; }
+  .control-panel { grid-template-columns: 1fr; }
+  .project-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .hero-links { gap: 16px; font-size: 14px; }
+  .selection-insight { padding: 18px; }
+  .waterfall-row { padding: 12px; border: 1px solid var(--stroke); border-radius: 14px; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+.focused-skill { padding: 12px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); font-size: 13px; line-height: 1.7; }
+.focused-skill strong { font-size: 22px; }
