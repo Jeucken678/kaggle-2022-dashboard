@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>技能树成长路径 Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Career Skill Tree</p>
+          <h1>从 Python/SQL 到云架构与 MLOps 的成长路径</h1>
+          <p class="hero-text" id="hero-subtitle"></p>
+          <div class="hero-note" id="stage-note"></div>
+        </div>
+        <aside class="control-panel">
+          <div class="control-card">
+            <label for="job-select">当前职位</label>
+            <select id="job-select"></select>
+          </div>
+          <div class="control-card">
+            <label for="stage-select">当前年限段</label>
+            <select id="stage-select"></select>
+          </div>
+          <div class="control-card compact">
+            <span class="metric-label">下一阶段</span>
+            <strong id="next-stage-label">-</strong>
+          </div>
+        </aside>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Skill Path</p>
+              <h2>技能演化路线</h2>
+            </div>
+            <p class="section-copy">
+              高亮当前阶段，并沿着后续阶段查看每个阶段最具代表性的技能组合。
+            </p>
+          </div>
+          <div class="stage-path" id="stage-path"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Unlocks</p>
+              <h2>下一阶段最值得解锁的 Top 3</h2>
+            </div>
+          </div>
+          <div class="unlock-list" id="unlock-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Category Trend</p>
+              <h2>技术栈重心迁移</h2>
+            </div>
+          </div>
+          <div class="category-grid" id="category-grid"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Waterfall</p>
+              <h2>被放弃的工具 vs 新采纳的工具</h2>
+            </div>
+            <p class="section-copy" id="waterfall-caption"></p>
+          </div>
+          <div class="waterfall-board" id="waterfall-board"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./dashboard-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
